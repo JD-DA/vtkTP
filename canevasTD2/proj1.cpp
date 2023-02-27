@@ -29,14 +29,16 @@ int main(int, char *[])
 
        vtkActor *actor = vtkActor::New();
        actor->SetMapper(mapper);
-       
-       vtkRenderer *ren = vtkRenderer::New();
+
+    vtkRenderer *ren = vtkRenderer::New();
+    vtkRenderer *ren2 = vtkRenderer::New();
        ren->AddActor(actor);
-         ren->AddActor(actor2);
+         ren2->AddActor(actor2);
        
        vtkRenderWindow *renwin = vtkRenderWindow::New();
        renwin->SetSize(768, 768);
        renwin->AddRenderer(ren);
+         renwin->AddRenderer(ren2);
 
     double vals[4] = { 0.75, 0, 0.05, 1 };
 
@@ -76,6 +78,11 @@ int main(int, char *[])
        vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
        iren->SetRenderWindow(renwin);
        renwin->Render();
+
+    ren->SetViewport(0.5, 0, 1, 1);
+
+    ren2->SetViewport(0, 0, 0.5, 1);
+
        iren->Start();
   return EXIT_SUCCESS;
 }
