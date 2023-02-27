@@ -14,8 +14,21 @@ int main(int, char *[])
        
        vtkDataSetMapper *mapper = vtkDataSetMapper::New();
        mapper->SetInputConnection(reader->GetOutputPort());
-    
-    
+    vtkLookupTable *lut = vtkLookupTable::New();
+
+    mapper->SetLookupTable(lut);
+
+    mapper->SetScalarRange(1,6);
+
+    lut->Build();
+
+    vtkContourFilter *cf = vtkContourFilter::New();
+    cf->SetInputConnection(reader->GetOutputPort());
+    cf->SetNumberOfContours(2);
+    cf->SetValue(0, 2.4);
+    cf->SetValue(1, 4);
+
+    mapper->SetInputConnection(cf->GetOutputPort());
        
        vtkActor *actor = vtkActor::New();
        actor->SetMapper(mapper);
@@ -26,13 +39,9 @@ int main(int, char *[])
        vtkRenderWindow *renwin = vtkRenderWindow::New();
        renwin->SetSize(768, 768);
        renwin->AddRenderer(ren);
-    vtkLookupTable *lut = vtkLookupTable::New();
 
-    mapper->SetLookupTable(lut);
 
-    mapper->SetScalarRange(1,6);
 
-    lut->Build();
        
        
        vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
