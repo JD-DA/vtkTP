@@ -4,7 +4,7 @@
 #include "helpers.h"
 #include "config.h"
 #include "vtkConeSource.h"
-
+#include "vtkCamera.h"
 
 // Globals
 unsigned int counter = 0;
@@ -38,7 +38,8 @@ int main(int, char *[])
     renderer->AddActor(actor);
     renderer->SetBackground(1,1,1);
 
-
+    renderer->GetActiveCamera()->SetPosition(5,10,10);
+    renderer->GetActiveCamera()->SetFocalPoint(0,1,0);
 
   vtkSmartPointer<vtkRenderWindow> renderWindow =vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
