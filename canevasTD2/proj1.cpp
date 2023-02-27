@@ -41,7 +41,11 @@ int main(int, char *[])
 
     lut->Build();
 
-       
+    for (int i = 0 ; i < 256 ; i++)
+    {
+        double vals[4] = { 1-(i/256.0), 0, (i/256.0), 1 };   //ou selon les valeurs de i,  A prend les valeurs de 1 à 0 et B de 0 à 1
+        lut->SetTableValue(i, vals);
+    }
        
        vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
        iren->SetRenderWindow(renwin);
