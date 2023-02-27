@@ -18,20 +18,9 @@ int main(int, char *[])
        mapper->SetInputConnection(reader->GetOutputPort());
     vtkLookupTable *lut = vtkLookupTable::New();
 
-    mapper->SetLookupTable(lut);
 
-    mapper->SetScalarRange(1,6);
 
-    lut->Build();
 
-    vtkContourFilter *cf = vtkContourFilter::New();
-    cf->SetInputConnection(reader->GetOutputPort());
-    cf->SetNumberOfContours(2);
-    cf->SetValue(0, 2.4);
-    cf->SetValue(1, 4);
-
-    mapper->SetInputConnection(cf->GetOutputPort());
-       
        vtkActor *actor = vtkActor::New();
        actor->SetMapper(mapper);
        
@@ -42,19 +31,15 @@ int main(int, char *[])
        renwin->SetSize(768, 768);
        renwin->AddRenderer(ren);
 
+    double vals[4] = { 0.75, 0, 0.05, 1 };
 
-       plane->SetOrigin(0,0,0);
-         plane->SetNormal(0,1,1);
+    lut->SetTableValue(0, vals);
 
-            cutter->SetInputConnection(reader->GetOutputPort());
-            //set implicte function
-            cutter->SetCutFunction(plane);
-            mapper->SetInputConnection(cutter->GetOutputPort());
+    mapper->SetLookupTable(lut);
 
+    mapper->SetScalarRange(2.4,6);
 
-
-
-    cutter->SetCutFunction(plane);
+    lut->Build();
 
        
        
