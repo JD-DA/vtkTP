@@ -40,6 +40,7 @@ int main(int, char *[])
 
     renderer->GetActiveCamera()->SetPosition(5,10,10);
     renderer->GetActiveCamera()->SetFocalPoint(0,1,0);
+    renderer->GetActiveCamera()->Azimuth(180);
 
   vtkSmartPointer<vtkRenderWindow> renderWindow =vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
