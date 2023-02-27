@@ -18,6 +18,12 @@ int main(int, char *[])
        mapper->SetInputConnection(reader->GetOutputPort());
     vtkLookupTable *lut = vtkLookupTable::New();
 
+    vtkDataSetMapper *mapper2 = vtkDataSetMapper::New();
+    vtkActor *actor2 = vtkActor::New();
+    actor2->SetMapper(mapper2);
+    mapper2->SetInputConnection(cutter->GetOutputPort());
+    mapper2->SetScalarRange(1,6);
+    mapper2->SetLookupTable(lut);
 
 
 
@@ -26,6 +32,7 @@ int main(int, char *[])
        
        vtkRenderer *ren = vtkRenderer::New();
        ren->AddActor(actor);
+         ren->AddActor(actor2);
        
        vtkRenderWindow *renwin = vtkRenderWindow::New();
        renwin->SetSize(768, 768);
@@ -46,6 +53,25 @@ int main(int, char *[])
         double vals[4] = { 1-(i/256.0), 0, (i/256.0), 1 };   //ou selon les valeurs de i,  A prend les valeurs de 1 à 0 et B de 0 à 1
         lut->SetTableValue(i, vals);
     }
+
+
+    vtkContourFilter *cf = vtkContourFilter::New();
+    cf->SetInputConnection(reader->GetOutputPort());
+    cf->SetNumberOfContours(2);
+    cf->SetValue(0, 2.4);
+    cf->SetValue(1, 4);
+
+    mapper->SetInputConnection(cf->GetOutputPort());
+
+
+    plane->SetOrigin(0,0,0);
+    plane->SetNormal(0,1,1);
+
+    cutter->SetInputConnection(reader->GetOutputPort());
+    //set implicte function
+    cutter->SetCutFunction(plane);
+    mapper2->SetInputConnection(cutter->GetOutputPort());
+
        
        vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
        iren->SetRenderWindow(renwin);
