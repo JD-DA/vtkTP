@@ -42,10 +42,17 @@ int main(int, char *[])
     renderer->GetActiveCamera()->SetFocalPoint(0,1,0);
     renderer->GetActiveCamera()->Azimuth(180);
 
+
   vtkSmartPointer<vtkRenderWindow> renderWindow =vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
   renderWindow->Render();
+    vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
 
+    iren->SetRenderWindow(renderWindow);
+
+    iren->Initialize();
+
+    iren->Start();
   // Start a timer 10 seconds to keep visible the rendering Window
   usleep(10*1000000);
 	 
