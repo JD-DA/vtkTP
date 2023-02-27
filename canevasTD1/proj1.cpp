@@ -3,22 +3,25 @@
 #include "exo-vtk-include.h"
 #include "helpers.h"
 #include "config.h"
+#include "vtkConeSource.h"
+
 
 // Globals
 unsigned int counter = 0;
 
 int main(int, char *[])
 {
+    vtkConeSource *cone = vtkConeSource::New();
 
-    vtkSmartPointer<vtkSphereSource> sphereSource =
-        vtkSmartPointer<vtkSphereSource>::New();
-    sphereSource->SetCenter(0.0, 0.0, 0.0);
-    sphereSource->SetRadius(5.0);
-    sphereSource->Update();
+    vtkSmartPointer<vtkConeSource> sphereSource =
+        vtkSmartPointer<vtkConeSource>::New();
+    cone->SetCenter(0.0, 0.0, 0.0);
+    //cone->SetRadius(5.0);
+    cone->Update();
 
     vtkSmartPointer<vtkPolyDataMapper> mapper =
       vtkSmartPointer<vtkPolyDataMapper>::New();
-    mapper->SetInputConnection(sphereSource->GetOutputPort());
+    mapper->SetInputConnection(cone->GetOutputPort());
 
     // Create an actor
     vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
