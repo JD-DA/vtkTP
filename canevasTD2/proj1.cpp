@@ -8,6 +8,8 @@
 
 int main(int, char *[])
 {
+    vtkCutter *cutter = vtkCutter::New();
+    vtkPlane *plane = vtkPlane::New();
     
     vtkDataSetReader *reader = vtkDataSetReader::New();
        reader->SetFileName(FICHIER);
@@ -41,6 +43,18 @@ int main(int, char *[])
        renwin->AddRenderer(ren);
 
 
+       plane->SetOrigin(0,0,0);
+         plane->SetNormal(0,1,1);
+
+            cutter->SetInputConnection(reader->GetOutputPort());
+            //set implicte function
+            cutter->SetCutFunction(plane);
+            mapper->SetInputConnection(cutter->GetOutputPort());
+
+
+
+
+    cutter->SetCutFunction(plane);
 
        
        
