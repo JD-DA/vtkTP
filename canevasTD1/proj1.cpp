@@ -31,11 +31,21 @@ int main(int, char *[])
     // Create an actor
     vtkSmartPointer<vtkActor> actor = vtkSmartPointer<vtkActor>::New();
     actor->SetMapper(mapper);
-    
-  // Setup renderer, render window, and interactor
+
+    // Create an actor
+    vtkSmartPointer<vtkActor> actor2 = vtkSmartPointer<vtkActor>::New();
+    actor2->SetMapper(mapper);
+    actor2->SetPosition(1,0,0);
+    actor->GetProperty()->SetColor(0.5,0.7,0.1);
+    actor2->GetProperty()->SetColor(0.9,0.7,0.1);
+
+
+
+    // Setup renderer, render window, and interactor
     vtkSmartPointer<vtkRenderer> renderer =vtkSmartPointer<vtkRenderer>::New();
     
     renderer->AddActor(actor);
+    renderer->AddActor(actor2);
     renderer->SetBackground(1,1,1);
 
     renderer->GetActiveCamera()->SetPosition(5,10,10);
