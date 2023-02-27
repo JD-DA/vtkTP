@@ -9,6 +9,22 @@
 // Globals
 unsigned int counter = 0;
 
+void TimerCallbackFunction ( vtkObject* caller, long unsigned int vtkNotUsed(eventId), void* clientData, void* vtkNotUsed(callData) )
+{
+    cout << "timer callback" << endl;
+    vtkSmartPointer<vtkRenderer> renderer =
+            static_cast<vtkRenderer*>(clientData);
+    renderer->GetActiveCamera()->Azimuth( 10 );
+
+    vtkRenderWindowInteractor* iren =
+            dynamic_cast<vtkRenderWindowInteractor*>(caller);
+    iren->GetRenderWindow()->Render();
+
+    iren->Render();
+
+    counter++;
+}
+
 int main(int, char *[])
 {
     vtkConeSource *cone = vtkConeSource::New();
@@ -52,15 +68,21 @@ int main(int, char *[])
     renderer->GetActiveCamera()->SetFocalPoint(0,1,0);
     renderer->GetActiveCamera()->Azimuth(180);
 
-
-  vtkSmartPointer<vtkRenderWindow> renderWindow =vtkSmartPointer<vtkRenderWindow>::New();
-  renderWindow->AddRenderer(renderer);
-  renderWindow->Render();
-    vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
-
+    vtkSmartPointer<vtkRenderWindow> renderWindow =vtkSmartPointer<vtkRenderWindow>::New();
+    renderWindow->AddRenderer(renderer);
+    vtkSmartPointer<vtkRenderWindowInteractor> iren =vtkSmartPointer<vtkRenderWindowInteractor>::New();
     iren->SetRenderWindow(renderWindow);
 
     iren->Initialize();
+
+    iren->CreateRepeatingTimer(100);
+
+    vtkSmartPointer<vtkCallbackCommand> timerCallback =
+            vtkSmartPointer<vtkCallbackCommand>::New();
+    timerCallback->SetCallback ( TimerCallbackFunction );
+    timerCallback->SetClientData(renderer);
+
+    iren->AddObserver ( vtkCommand::TimerEvent, timerCallback );
 
     iren->Start();
   // Start a timer 10 seconds to keep visible the rendering Window
