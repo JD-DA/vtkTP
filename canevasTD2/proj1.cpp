@@ -31,14 +31,12 @@ int main(int, char *[])
        actor->SetMapper(mapper);
 
     vtkRenderer *ren = vtkRenderer::New();
-    vtkRenderer *ren2 = vtkRenderer::New();
        ren->AddActor(actor);
-         ren2->AddActor(actor2);
+         ren->AddActor(actor2);
        
        vtkRenderWindow *renwin = vtkRenderWindow::New();
        renwin->SetSize(768, 768);
        renwin->AddRenderer(ren);
-         renwin->AddRenderer(ren2);
 
     double vals[4] = { 0.75, 0, 0.05, 1 };
 
@@ -63,6 +61,7 @@ int main(int, char *[])
     cf->SetValue(0, 2.4);
     cf->SetValue(1, 4);
 
+
     mapper->SetInputConnection(cf->GetOutputPort());
 
 
@@ -74,16 +73,15 @@ int main(int, char *[])
     cutter->SetCutFunction(plane);
     mapper2->SetInputConnection(cutter->GetOutputPort());
 
-       
-       vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
-       iren->SetRenderWindow(renwin);
-       renwin->Render();
 
-    ren->SetViewport(0.5, 0, 1, 1);
+    int nbpas=2000;
 
-    ren2->SetViewport(0, 0, 0.5, 1);
+    for (int i = 1 ; i < nbpas ; i++)
+    {
+        cf->SetValue(0, 2.4 + (i*0.001));
+        renwin->Render();
+    }
 
-       iren->Start();
   return EXIT_SUCCESS;
 }
 
