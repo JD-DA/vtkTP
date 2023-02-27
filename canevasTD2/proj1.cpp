@@ -26,7 +26,13 @@ int main(int, char *[])
        vtkRenderWindow *renwin = vtkRenderWindow::New();
        renwin->SetSize(768, 768);
        renwin->AddRenderer(ren);
-       
+    vtkLookupTable *lut = vtkLookupTable::New();
+
+    mapper->SetLookupTable(lut);
+
+    mapper->SetScalarRange(1,6);
+
+    lut->Build();
        
        
        vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
