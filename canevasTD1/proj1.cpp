@@ -6,6 +6,41 @@
 #include "vtkConeSource.h"
 #include "vtkCamera.h"
 
+#include <vtkCommand.h>
+#include<vtkProperty.h>
+
+#include <vtkBoxWidget.h>
+
+#include <vtkTransform.h>
+
+class vtkMyCallback : public vtkCommand
+
+{
+
+public:
+
+    static vtkMyCallback *New()
+
+    { return new vtkMyCallback; }
+
+    virtual void Execute(vtkObject *caller, unsigned long, void*)
+
+    {
+
+        vtkTransform *t = vtkTransform::New();
+
+        vtkBoxWidget *widget = reinterpret_cast<vtkBoxWidget*>(caller);
+
+        widget->GetTransform(t);
+
+        widget->GetProp3D()->SetUserTransform(t);
+
+        t->Delete();
+
+    }
+
+};
+
 // Globals
 unsigned int counter = 0;
 
@@ -72,17 +107,23 @@ int main(int, char *[])
     renderWindow->AddRenderer(renderer);
     vtkSmartPointer<vtkRenderWindowInteractor> iren =vtkSmartPointer<vtkRenderWindowInteractor>::New();
     iren->SetRenderWindow(renderWindow);
+    vtkBoxWidget *boxWidget = vtkBoxWidget::New();
+
+    boxWidget->SetInteractor(iren);
+
+    boxWidget->SetPlaceFactor(1.25);
+
+    boxWidget->SetProp3D(actor);
+
+    boxWidget->PlaceWidget();
+
+    vtkMyCallback *callback = vtkMyCallback::New();
+
+    boxWidget->AddObserver(vtkCommand::InteractionEvent, callback);
+
+    boxWidget->On();
 
     iren->Initialize();
-
-    iren->CreateRepeatingTimer(100);
-
-    vtkSmartPointer<vtkCallbackCommand> timerCallback =
-            vtkSmartPointer<vtkCallbackCommand>::New();
-    timerCallback->SetCallback ( TimerCallbackFunction );
-    timerCallback->SetClientData(renderer);
-
-    iren->AddObserver ( vtkCommand::TimerEvent, timerCallback );
 
     iren->Start();
   // Start a timer 10 seconds to keep visible the rendering Window
