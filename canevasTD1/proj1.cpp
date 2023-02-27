@@ -17,7 +17,12 @@ int main(int, char *[])
         vtkSmartPointer<vtkConeSource>::New();
     cone->SetCenter(0.0, 0.0, 0.0);
     //cone->SetRadius(5.0);
+    cone->SetHeight( 3.0 );
+    cone->SetRadius( 0.5 );
+    cone->SetResolution( 10 );
     cone->Update();
+
+
 
     vtkSmartPointer<vtkPolyDataMapper> mapper =
       vtkSmartPointer<vtkPolyDataMapper>::New();
@@ -32,6 +37,8 @@ int main(int, char *[])
     
     renderer->AddActor(actor);
     renderer->SetBackground(1,1,1);
+
+
 
   vtkSmartPointer<vtkRenderWindow> renderWindow =vtkSmartPointer<vtkRenderWindow>::New();
   renderWindow->AddRenderer(renderer);
