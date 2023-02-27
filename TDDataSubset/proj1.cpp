@@ -41,7 +41,7 @@ GetRelevantZRange(const double *origin, const double *normal, int *range)
     // There are gridSize points in each direction.
     // The i^{th} z-plane is located at i/(gridSize-1.0).
     range[0] = 0;
-    range[1] = gridSize*0.56-1;
+    range[1] = gridSize*0.5-1;
   //  range[1] = gridSize-1;
 }
 
