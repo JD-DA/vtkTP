@@ -75,11 +75,23 @@ int main(int, char *[])
 
 
     int nbpas=2000;
+    reader->Update();
+    double bounds[6];
+    vtkDataSet *polydata=reader->GetOutput();
 
+    polydata->GetBounds(bounds);
+
+    std::cout  << "xmin: " << bounds[0] << " "
+               << "xmax: " << bounds[1] << std::endl
+               << "ymin: " << bounds[2] << " "
+               << "ymax: " << bounds[3] << std::endl
+               << "zmin: " << bounds[4] << " "
+               << "zmax: " << bounds[5] << std::endl;
     for (int i = 1 ; i < nbpas ; i++)
     {
         cf->SetValue(0, 2.4 + (i*0.001));
         renwin->Render();
+        plane->SetOrigin(bounds[0]+i*bounds[1]/nbpas,bounds[2]+i*bounds[3]/nbpas,bounds[4]+i*bounds[5]/nbpas);
     }
 
   return EXIT_SUCCESS;
