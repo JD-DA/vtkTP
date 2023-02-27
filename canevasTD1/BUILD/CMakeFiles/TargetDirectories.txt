@@ -1,0 +1,5 @@
+/home/o2183171@campus.univ-orleans.fr/bigdata/canevasTD1/BUILD/CMakeFiles/vtktp.dir
+/home/o2183171@campus.univ-orleans.fr/bigdata/canevasTD1/BUILD/CMakeFiles/check.dir
+/home/o2183171@campus.univ-orleans.fr/bigdata/canevasTD1/BUILD/CMakeFiles/test.dir
+/home/o2183171@campus.univ-orleans.fr/bigdata/canevasTD1/BUILD/CMakeFiles/edit_cache.dir
+/home/o2183171@campus.univ-orleans.fr/bigdata/canevasTD1/BUILD/CMakeFiles/rebuild_cache.dir
