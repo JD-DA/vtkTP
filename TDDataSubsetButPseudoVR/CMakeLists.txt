@@ -23,7 +23,9 @@ ENDIF (APPLE)
 IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 SET(OperatingSystem "Linux")
-set (MY_MESHES_PATH  /home/o2183171@campus.univ-orleans.fr/bigdata/canevasTDPseudoVR)
+
+set (MY_MESHES_PATH  /tp)
+
 find_package(VTK)
 include(${VTK_USE_FILE})
 
@@ -41,7 +43,6 @@ configure_file (
  
 
 file(GLOB SRC_LIST ${CMAKE_CURRENT_SOURCE_DIR}/*.cpp )
-
 
 include_directories("${PROJECT_BINARY_DIR}")
 

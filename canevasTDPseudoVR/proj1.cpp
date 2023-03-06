@@ -21,7 +21,7 @@ int main(int argc, char *argv[])
     //
     vtkNew<vtkMultiBlockPLOT3DReader> pl3d;
     pl3d->SetXYZFileName(location);
-    pl3d->SetQFileName(location2);
+
     pl3d->SetScalarFunctionNumber(100);
     pl3d->SetVectorFunctionNumber(202);
     pl3d->Update();
