@@ -98,7 +98,7 @@ int main(int argc, char *argv[])
     isoActor->VisibilityOn();
     ren1->AddActor(cut);
 
-    unsigned int n = 4;
+    unsigned int n = 40;
     double opacity = 1.0 / (static_cast<double>(n)) * 5.0;
     cut->GetProperty()->SetOpacity(1);
     ren1->SetBackground(colors->GetColor3d("Slategray").GetData());
