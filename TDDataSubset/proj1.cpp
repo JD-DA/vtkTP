@@ -33,16 +33,52 @@ bool PositiveSideOfPlane(const double *origin, const double *normal,
     return (sum < 0.);
 }
 
+bool intersectPlane(const double *origin, const double *normal,
+                    const int slice) {
+    double point[3];
+    point[0] = 0;
+    point[1] = 0;
+    point[2] = slice / (gridSize - 1.0);
 
+    bool side = PositiveSideOfPlane(origin, normal, point);
+
+
+    point[1] = 1;
+
+    if (side != PositiveSideOfPlane(origin, normal, point))
+        return true;
+
+    point[1] = 0;
+    point[0] = 1;
+
+    if (side != PositiveSideOfPlane(origin, normal, point))
+        return true;
+
+    point[1] = 1;
+    point[0] = 1;
+
+    if (side != PositiveSideOfPlane(origin, normal, point))
+        return true;
+    return false;
+}
 void
 GetRelevantZRange(const double *origin, const double *normal, int *range)
 {
     // The data goes from 0 to 1 in X, Y, and Z.
     // There are gridSize points in each direction.
     // The i^{th} z-plane is located at i/(gridSize-1.0).
-    range[0] = 0;
-    range[1] = gridSize*0.5-1;
-  //  range[1] = gridSize-1;
+    range[0] = -1;
+    //range[1] = gridSize*0.5-1;
+    range[1] = gridSize-1;
+
+
+    for(int i=0;i<gridSize;i++) {
+        if ((range[0] == -1) && intersectPlane(origin, normal, (double) i))
+            range[0] = i;
+        if (intersectPlane(origin, normal, (double) i))
+            range[1] = i;
+
+    }
 }
 
 vtkRectilinearGrid *
@@ -60,7 +96,7 @@ int main(int argc, char *argv[])
 {   GetMemorySize("initialization");
     int t1;
     t1 = timer->StartTimer();
-    
+
    
    double origin[3] = { 0.5, 0.5, 0.5 };
    double normal[3] = { 0.1, 0.2, 0.974679 };
