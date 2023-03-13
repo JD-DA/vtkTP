@@ -24,7 +24,7 @@ IF(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
 
 SET(OperatingSystem "Linux")
 
-set (MY_MESHES_PATH  /mnt/etu/data_VTK)
+set (MY_MESHES_PATH  /tp)
 
 find_package(VTK)
 include(${VTK_USE_FILE})

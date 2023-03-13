@@ -21,7 +21,7 @@ const char *location = FICHIER;
 
 int winSize = 768;
 
-int NbPasses = 1; // should be changed to 32.
+int NbPasses = 3; // should be changed to 32.
 int passNum ;
 
 using std::cerr;
@@ -89,7 +89,7 @@ int main(int argc, char *argv[])
         int zStart = 0;
         
         
-        int zEnd = zStart+step;
+        int zEnd = gridSize/2;
     
     
        GetMemorySize(("Pass "+std::to_string(NbPasses)+ " before read").c_str());
