@@ -147,7 +147,7 @@ int main(int argc, char *argv[])
 
     vtkCamera *cam = ren->GetActiveCamera();
     cam->SetFocalPoint(0.5, 0.5, 0.5);
-    cam->SetPosition(0.5, 0.5, 1.5);
+    cam->SetPosition(0.5, .5, 1.5);
 
 
     vtkRenderWindow *renwin = vtkRenderWindow::New();
@@ -156,7 +156,7 @@ int main(int argc, char *argv[])
 
 
     vtkRenderWindowInteractor *iren = vtkRenderWindowInteractor::New();
-    unsigned int n = 7;
+    unsigned int n = 30;
     double opacity = 1.0 / (static_cast<double>(n)) * 5.0;
 
     plane->SetNormal(ren->GetActiveCamera()->GetViewPlaneNormal());
