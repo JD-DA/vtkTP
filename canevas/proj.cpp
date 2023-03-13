@@ -18,7 +18,7 @@
 int gridSize = TAILLE;
 const char *location = FICHIER;
 
-int NbPasses = 1; // should be changed to 32.
+int NbPasses = 32; // should be changed to 32.
 int passNum ;
 int winSize = 768;
 
@@ -41,6 +41,15 @@ int main(int argc, char *argv[])
     passNum=0;
     int zStart = 0;
     int zEnd = gridSize-1;
+
+    float *auxrgba = new float[4*winSize*winSize];
+    for (int i = 0 ; i < winSize*winSize ; i++)
+    {
+        auxrgba[i*4] =  0;
+        auxrgba[i*4+1] = 0;
+        auxrgba[i*4+2] = 0;
+        auxrgba[i*4+3] = 0;
+    }
     
       
      
@@ -48,13 +57,13 @@ int main(int argc, char *argv[])
     
          
  
-         int step=(gridSize/3)-1;
+         int step=(gridSize/NbPasses)-1;
            
            
-         int zStart = 0;
+         int zStart = passNum*step;
 
 
-         int zEnd = zStart+step;
+         int zEnd = zStart+step-1;
            
          GetMemorySize(("Pass "+std::to_string(NbPasses)+ " before read").c_str());
            
@@ -100,7 +109,7 @@ int main(int argc, char *argv[])
          plane->SetNormal(ren->GetActiveCamera()->GetViewPlaneNormal());
          plane->SetOrigin(ren->GetActiveCamera()->GetFocalPoint());
          
-         double posZPlane= 0.2 ;
+         double posZPlane= (zStart+((zEnd-zStart)/2.0))/(double )TAILLE ;
          double origin[3] = { 0.5, 0.5,posZPlane };
          plane->SetOrigin(origin);
     
@@ -114,16 +123,22 @@ int main(int argc, char *argv[])
          
          GetMemorySize("end");
          timer->StopTimer(t1,"time");
-        
+        float alpha3;
          float *rgba = renwin->GetRGBAPixelData(0, 0, winSize-1, winSize-1, 1);
+         float *zbuffer = renwin->GetZbufferData(0, 0, winSize-1, winSize-1);
          
              for (int i = 0 ; i < winSize*winSize ; i++)
-             {   float alpha=0.5;
+             {   //float alpha=0.5;
                  for (int j = 0 ; j < 3 ;j++)
                  {
-                     rgba[i*4+j] = rgba[i*4+j]*2.0;
+                     auxrgba[i*4+j] = auxrgba[i*4+j]+rgba[i*4+j]/NbPasses;
+                     //rgba[i*4+j] = rgba[i*4+j]*2.0;
                  }
-                 rgba[i*4+3] = rgba[i*4+3];
+                 /*float alpha=rgba[i*4+3];
+                 float alpha2=auxrgba[i*4+3];
+                 auxrgba[i*4+3] += rgba[i*4+3]*(1-auxrgba[i*4+3]);
+                 //rgba[i*4+3] = rgba[i*4+3];
+                 alpha2=auxrgba[i*4+3];*/
              }
 
          char name[128];
@@ -131,7 +146,7 @@ int main(int argc, char *argv[])
          WriteImage(name, rgba, winSize,  winSize);
 
          sprintf(name, "imageIntermediaire%d.png", passNum);
-         WriteImage(name, rgba, winSize,  winSize);
+         WriteImage(name, auxrgba, winSize,  winSize);
          free(rgba);
 
            }//fin du for
