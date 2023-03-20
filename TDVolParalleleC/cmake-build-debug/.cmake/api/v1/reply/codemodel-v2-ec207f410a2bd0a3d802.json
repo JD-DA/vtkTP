@@ -1,0 +1,96 @@
+{
+	"configurations" : 
+	[
+		{
+			"directories" : 
+			[
+				{
+					"build" : ".",
+					"jsonFile" : "directory-.-Debug-f5ebdc15457944623624.json",
+					"minimumCMakeVersion" : 
+					{
+						"string" : "2.8"
+					},
+					"projectIndex" : 0,
+					"source" : ".",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"name" : "Debug",
+			"projects" : 
+			[
+				{
+					"directoryIndexes" : 
+					[
+						0
+					],
+					"name" : "vtktp",
+					"targetIndexes" : 
+					[
+						0,
+						1,
+						2,
+						3,
+						4
+					]
+				}
+			],
+			"targets" : 
+			[
+				{
+					"directoryIndex" : 0,
+					"id" : "check::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-check-Debug-b873177754b00c533b05.json",
+					"name" : "check",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prun1::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prun1-Debug-6f08e45a1ca6a186351b.json",
+					"name" : "prun1",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prun2::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prun2-Debug-3e1389ea016f57dae230.json",
+					"name" : "prun2",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "prun4::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-prun4-Debug-5c5fa5e6ab86c2da2fd6.json",
+					"name" : "prun4",
+					"projectIndex" : 0
+				},
+				{
+					"directoryIndex" : 0,
+					"id" : "vtktp::@6890427a1f51a3e7e1df",
+					"jsonFile" : "target-vtktp-Debug-64942eef7597604b4d48.json",
+					"name" : "vtktp",
+					"projectIndex" : 0
+				}
+			]
+		}
+	],
+	"kind" : "codemodel",
+	"paths" : 
+	{
+		"build" : "/home/o2183171@campus.univ-orleans.fr/bigdata/TDVolParalleleC/cmake-build-debug",
+		"source" : "/home/o2183171@campus.univ-orleans.fr/bigdata/TDVolParalleleC"
+	},
+	"version" : 
+	{
+		"major" : 2,
+		"minor" : 3
+	}
+}

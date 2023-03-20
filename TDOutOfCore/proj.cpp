@@ -21,7 +21,7 @@ const char *location = FICHIER;
 
 int winSize = 768;
 
-int NbPasses = 3; // should be changed to 32.
+int NbPasses = 2; // should be changed to 32.
 int passNum ;
 
 using std::cerr;
@@ -83,13 +83,13 @@ int main(int argc, char *argv[])
      
      for( passNum=0; passNum<NbPasses;passNum++){//coorec
     
-    int step=(gridSize/3)-1;
+    int step=(gridSize/NbPasses)-1;
         
         
-        int zStart = 0;
+        int zStart = passNum*(step+40);
         
         
-        int zEnd = gridSize/2;
+        int zEnd = (passNum+1)*(step);
     
     
        GetMemorySize(("Pass "+std::to_string(NbPasses)+ " before read").c_str());
@@ -119,8 +119,8 @@ int main(int argc, char *argv[])
     char namez[128];
     sprintf(namez, "imageZ%d.png", passNum);
     WriteImage(namez,new_rgba,winSize, winSize);
-  
-   
+
+
     free(rgba);
     free(zbuffer);
     free(new_rgba);
