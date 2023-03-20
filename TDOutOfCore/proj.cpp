@@ -21,7 +21,7 @@ const char *location = FICHIER;
 
 int winSize = 768;
 
-int NbPasses = 2; // should be changed to 32.
+int NbPasses = 32; // should be changed to 32.
 int passNum ;
 
 using std::cerr;
@@ -70,6 +70,7 @@ int main(int argc, char *argv[])
     // THIS DOESN'T WORK WITHOUT MESA
     renwin->OffScreenRenderingOn();
     renwin->SetSize(winSize, winSize);
+    renwin->SetMultiSamples(0);
     renwin->AddRenderer(ren);
     
     // Read the data.
@@ -96,10 +97,10 @@ int main(int argc, char *argv[])
     int step=(gridSize/NbPasses)-1;
         
         
-        int zStart = passNum*(step+40);
+        int zStart = passNum*(step);
         
         
-        int zEnd = (passNum+1)*(step);
+        int zEnd = zStart+step;
     
     
        GetMemorySize(("Pass "+std::to_string(NbPasses)+ " before read").c_str());
@@ -144,8 +145,10 @@ int main(int argc, char *argv[])
     free(zbuffer);
     free(new_rgba);
     }//fin du for 
-    
+
      WriteImage("final_image.png", auxrgba, winSize, winSize);
+    free(auxzbuffer);
+    free(auxrgba);
     
     GetMemorySize("end");
     timer->StopTimer(t1,"time");
