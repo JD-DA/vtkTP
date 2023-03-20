@@ -77,6 +77,16 @@ int main(int argc, char *argv[])
      passNum=0;
     int zStart = 0;
     int zEnd = gridSize-1;
+
+    float *auxrgba = new float[4*winSize*winSize];
+    float *auxzbuffer = new float[4*winSize*winSize];
+    for (int i = 0 ; i < winSize*winSize ; i++)
+    {  auxzbuffer[i]=1.0;
+        auxrgba[i*4] =  0;
+        auxrgba[i*4+1] = 0;
+        auxrgba[i*4+2] = 1;
+        auxrgba[i*4+3] = 0;
+    }
     
      float *rgba = new float[4*winSize*winSize];
      
@@ -107,6 +117,15 @@ int main(int argc, char *argv[])
     
     float *rgba = renwin->GetRGBAPixelData(0, 0, winSize-1, winSize-1, 1);
     float *zbuffer = renwin->GetZbufferData(0, 0, winSize-1, winSize-1);
+
+         for (int i = 0 ; i < winSize*winSize ; i++)
+         {  if (auxzbuffer[i] > zbuffer[i]) {
+                 auxzbuffer[i]= zbuffer[i];
+                 auxrgba[i*4] = rgba[i*4];
+                 auxrgba[i*4+1] = rgba[i*4+1];
+                 auxrgba[i*4+2] = rgba[i*4+2];
+                 auxrgba[i*4+3] = rgba[i*4+3];
+             }  }
     
     char name[128];
     sprintf(name, "image%d.png", passNum);
@@ -126,7 +145,7 @@ int main(int argc, char *argv[])
     free(new_rgba);
     }//fin du for 
     
-     WriteImage("final_image.png", rgba, winSize, winSize);
+     WriteImage("final_image.png", auxrgba, winSize, winSize);
     
     GetMemorySize("end");
     timer->StopTimer(t1,"time");
