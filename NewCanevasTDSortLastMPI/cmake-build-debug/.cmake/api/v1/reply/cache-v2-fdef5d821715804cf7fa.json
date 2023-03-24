@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/o2183171@campus.univ-orleans.fr/bigdata/CanevasTDSortLastMPI/cmake-build-debug"
+			"value" : "/home/o2183171@campus.univ-orleans.fr/CLionProjects/vtkTP/NewCanevasTDSortLastMPI/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -663,7 +663,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/o2183171@campus.univ-orleans.fr/bigdata/CanevasTDSortLastMPI"
+			"value" : "/home/o2183171@campus.univ-orleans.fr/CLionProjects/vtkTP/NewCanevasTDSortLastMPI"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -6375,7 +6375,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/o2183171@campus.univ-orleans.fr/bigdata/CanevasTDSortLastMPI/cmake-build-debug"
+			"value" : "/home/o2183171@campus.univ-orleans.fr/CLionProjects/vtkTP/NewCanevasTDSortLastMPI/cmake-build-debug"
 		},
 		{
 			"name" : "vtktp_IS_TOP_LEVEL",
@@ -6399,7 +6399,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/o2183171@campus.univ-orleans.fr/bigdata/CanevasTDSortLastMPI"
+			"value" : "/home/o2183171@campus.univ-orleans.fr/CLionProjects/vtkTP/NewCanevasTDSortLastMPI"
 		}
 	],
 	"kind" : "cache",

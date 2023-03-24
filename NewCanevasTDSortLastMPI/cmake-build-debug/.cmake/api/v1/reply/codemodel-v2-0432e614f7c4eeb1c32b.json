@@ -75,7 +75,7 @@
 				{
 					"directoryIndex" : 0,
 					"id" : "vtktp::@6890427a1f51a3e7e1df",
-					"jsonFile" : "target-vtktp-Debug-36043e2e4b7a1af4c81f.json",
+					"jsonFile" : "target-vtktp-Debug-143fdd82b0013e67ec26.json",
 					"name" : "vtktp",
 					"projectIndex" : 0
 				}
@@ -85,8 +85,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/o2183171@campus.univ-orleans.fr/bigdata/CanevasTDSortLastMPI/cmake-build-debug",
-		"source" : "/home/o2183171@campus.univ-orleans.fr/bigdata/CanevasTDSortLastMPI"
+		"build" : "/home/o2183171@campus.univ-orleans.fr/CLionProjects/vtkTP/NewCanevasTDSortLastMPI/cmake-build-debug",
+		"source" : "/home/o2183171@campus.univ-orleans.fr/CLionProjects/vtkTP/NewCanevasTDSortLastMPI"
 	},
 	"version" : 
 	{
